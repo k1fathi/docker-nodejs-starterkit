@@ -1,7 +1,18 @@
-// app.js
 const http = require('http');
+const os = require('os');
 
-const hostname = '192.168.1.100';
+const interfaces = os.networkInterfaces();
+let ipAddress = '';
+
+// Iterate through network interfaces to find the IP address
+Object.keys(interfaces).forEach((iface) => {
+  interfaces[iface].forEach((details) => {
+    if (details.family === 'IPv4' && !details.internal) {
+      ipAddress = details.address;
+    }
+  });
+});
+
 const port = 3000;
 
 const server = http.createServer((req, res) => {
@@ -10,6 +21,6 @@ const server = http.createServer((req, res) => {
   res.end('Hello, World!\n');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, ipAddress, () => {
+  console.log(`Server running at http://${ipAddress}:${port}/`);
 });

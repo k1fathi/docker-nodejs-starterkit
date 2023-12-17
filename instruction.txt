@@ -3,21 +3,36 @@ docker pull node
 
 cd /home/uroot/nodejs
 
-docker stop $(docker ps -q) & docker rm $(docker ps -aq) & docker rmi $(docker images -aq) & docker system prune -a
+sudo docker stop $(sudo docker ps -q) & 
+sudo docker rm $(sudo docker ps -aq) & sudo docker rmi $(sudo docker images -aq) & sudo docker system prune -a
 
 
 docker build -t your_repository_name/your_image_name:your_tag .
-docker build -t myusername/node-app:v1.0 .
-docker run -p 3000:3000 myusername/node-app:v1.0
 
+sudo docker build -t myusername/node-app:v1.0 .
+sudo docker run -p 3000:3000 myusername/node-app:v1.0
 
+http://192.168.1.100:3000/
 
 
 docker build -t my-node-app .
 
 docker run -p 3000:3000 my-node-app
 
+ssh-keygen -t rsa -b 4096 -C "k1fathi33@gmail.com"
+ 
+ssh -T git@github.com
+
+sudo usermod -aG docker $USER
+sudo usermod -aG docker uroot
 
 
+sudo groupadd docker
+sudo usermod -aG docker uroot
+
+sudo systemctl restart docker
+
+
+sudo docker stop f2e95b5f3df6 & sudo  docker rm f2e95b5f3df6
 
 
